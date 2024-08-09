@@ -1,12 +1,18 @@
-# Very short description of the package
+# Paydisini.co.id Package for laravel client
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jstalinko/paydisini-laravel.svg?style=flat-square)](https://packagist.org/packages/jstalinko/paydisini-laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/jstalinko/paydisini-laravel.svg?style=flat-square)](https://packagist.org/packages/jstalinko/paydisini-laravel)
 ![GitHub Actions](https://github.com/jstalinko/paydisini-laravel/actions/workflows/main.yml/badge.svg)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+Paydisini Laravel adalah paket yang memudahkan integrasi aplikasi Laravel Anda dengan payment gateway Paydisini (https://paydisini.co.id). Dengan paket ini, Anda dapat dengan cepat menghubungkan aplikasi Anda ke sistem pembayaran online Paydisini, sehingga memungkinkan pengguna Anda untuk melakukan transaksi secara aman dan efisien.
 
-## Installation
+## Fitur
+- Integrasi Mudah: Menyediakan metode sederhana untuk menghubungkan aplikasi Laravel dengan Paydisini.
+- Transaksi Aman: Menggunakan protokol keamanan terbaik untuk melindungi data transaksi.
+- Dukungan Lengkap: Mendukung berbagai jenis pembayaran yang disediakan oleh Paydisini.
+- Konfigurasi Fleksibel: Mudah dikonfigurasi melalui file konfigurasi Laravel.
+
+## Installasi
 
 You can install the package via composer:
 
