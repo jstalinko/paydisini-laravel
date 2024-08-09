@@ -3,6 +3,7 @@
 namespace Jstalinko\PaydisiniLaravel;
 
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class PaydisiniLaravel
@@ -184,5 +185,40 @@ class PaydisiniLaravel
         ]);
     
         return $response->getBody()->getContents();
+    }
+
+     /**
+     * Handle the callback from the payment gateway.
+     *
+     * @return JsonResponse
+     */
+    public function handleCallback(Request $request, string $paymentId): JsonResponse
+    {
+        $key = $request->input('key', '');
+        $uniqueCode = $request->input('unique_code', '');
+        $status = $request->input('status', '');
+        $signature = $request->input('signature', '');
+
+        // Define the expected signature
+        $expectedSignature = md5($this->apikey . $paymentId . 'CallbackStatus');
+
+        // Verify the signature and status
+        if ($key === $this->apikey && $request->ip() === '84.247.150.90') {
+            if ($signature === $expectedSignature) {
+                // Process payment status
+                if ($status === 'Success') {
+                    // Handle successful payment (e.g., update database)
+                    // mysqli_query('YOUR QUERY IF PAYMENT SUCCESS');
+                    return response()->json(['success' => true]);
+                } elseif ($status === 'Canceled') {
+                    // Handle canceled payment (e.g., update database)
+                    // mysqli_query('YOUR QUERY IF PAYMENT CANCELED');
+                    return response()->json(['success' => true]);
+                }
+            }
+        }
+
+        // Return failure response if validation fails
+        return response()->json(['success' => false]);
     }
 }
