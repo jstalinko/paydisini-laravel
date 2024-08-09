@@ -1,0 +1,55 @@
+{
+    "name": "jstalinko/paydisini-laravel",
+    "description": "Paydisini.co.id untuk pengguna laravel",
+    "keywords": [
+        "jstalinko",
+        "paydisini-laravel"
+    ],
+    "homepage": "https://github.com/jstalinko/paydisini-laravel",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "alinko",
+            "email": "alinkokomansuby@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.0",
+        "illuminate/support": "^10.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jstalinko\\PaydisiniLaravel\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jstalinko\\PaydisiniLaravel\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jstalinko\\PaydisiniLaravel\\PaydisiniLaravelServiceProvider"
+            ],
+            "aliases": {
+                "PaydisiniLaravel": "Jstalinko\\PaydisiniLaravel\\PaydisiniLaravelFacade"
+            }
+        }
+    }
+}
