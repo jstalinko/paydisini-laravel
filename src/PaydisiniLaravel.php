@@ -22,7 +22,7 @@ class PaydisiniLaravel
     public function __construct()
     {
         $this->apikey = config('paydisini-laravel.api_key');
-        $this->client = new Client(['base_uri' => 'https://api.paydisini.co.id/v1' ]);
+        $this->client = new Client(['base_uri' => 'https://api.paydisini.co.id/v1/' ]);
     }
     
     /**
@@ -49,7 +49,7 @@ class PaydisiniLaravel
      */
     public function getPaymentChannels(): string|JsonResponse
     {
-        $response = $this->client->request('POST' , '/' , [
+        $response = $this->client->request('POST' , '.' , [
             'form_params' => [
                 'key' => $this->apikey,
                 'request' => 'payment_channel',
@@ -134,7 +134,7 @@ class PaydisiniLaravel
             $payload['ewallet_phone'] = $data['ewallet_phone'];
         }
 
-        $response = $this->client->request('POST' , '/' , [
+        $response = $this->client->request('POST' , '.' , [
             'form_params' => $payload
         ]);
 
@@ -152,7 +152,7 @@ class PaydisiniLaravel
      */
     public function detailTransaction(string $unique_code): string|JsonResponse
     {
-        $response = $this->client->request('POST' , '/' , [
+        $response = $this->client->request('POST' , '.' , [
             'form_params' => [
                 'key' => $this->apikey,
                 'request' => 'status',
@@ -175,7 +175,7 @@ class PaydisiniLaravel
      */
     public function cancelTransaction(string $unique_code): string|JsonResponse
     {
-        $response = $this->client->request('POST' , '/' , [
+        $response = $this->client->request('POST' , '.' , [
             'form_params' => [
                 'key' => $this->apikey,
                 'request' => 'cancel',
