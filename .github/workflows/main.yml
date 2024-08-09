@@ -27,6 +27,3 @@ jobs:
 
     - name: Run PHPUnit tests
       run: vendor/bin/phpunit --coverage-text
-      env:
-        DB_CONNECTION: sqlite  # Set environment variables if needed
-        DB_DATABASE: :memory:
