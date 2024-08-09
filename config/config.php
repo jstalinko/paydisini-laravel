@@ -27,17 +27,4 @@ return [
 
     'api_key' => env('PAYDISINI_API_KEY', null),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Endpoint API Paydisini
-    |--------------------------------------------------------------------------
-    |
-    | Ini adalah URL dasar dari API Paydisini. Anda dapat memodifikasinya jika
-    | Anda perlu menggunakan versi API yang berbeda atau jika Paydisini 
-    | menyediakan endpoint khusus untuk aplikasi Anda. Biasanya, Anda tidak 
-    | perlu mengubah nilai ini.
-    |
-    */
-
-    'api_endpoint' => 'https://api.paydisini.co.id/v1',
 ];

@@ -22,7 +22,7 @@ class PaydisiniLaravel
     public function __construct()
     {
         $this->apikey = config('paydisini-laravel.api_key');
-        $this->client = new Client(['base_uri' => config('paydisini-laravel.api_endpoint') ]);
+        $this->client = new Client(['base_uri' => 'https://api.paydisini.co.id/v1' ]);
     }
     
     /**
