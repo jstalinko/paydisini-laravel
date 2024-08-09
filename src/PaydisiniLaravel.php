@@ -71,7 +71,7 @@ class PaydisiniLaravel
      */
     public function getPaymentGuide(string $service): string|JsonResponse
     {
-        $response = $this->client->request('POST','/' , [
+        $response = $this->client->request('POST','.' , [
             'form_params' => [
                 'key' => $this->apikey,
                 'request' => 'payment_guide',
@@ -92,7 +92,7 @@ class PaydisiniLaravel
      */
     public function getProfile(): string|JsonResponse
     {
-        $response = $this->client->request('POST','/' , [
+        $response = $this->client->request('POST','.' , [
             'form_params' => [
                 'key' => $this->apikey,
                 'request' => 'profile',
