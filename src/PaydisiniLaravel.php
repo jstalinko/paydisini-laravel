@@ -5,6 +5,7 @@ namespace Jstalinko\PaydisiniLaravel;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 
 class PaydisiniLaravel
 {
@@ -45,9 +46,9 @@ class PaydisiniLaravel
      * This method sends a request to the Paydisini API to retrieve the 
      * available payment channels.
      *
-     * @return string|JsonResponse
+     * @return Collection
      */
-    public function getPaymentChannels(): string|JsonResponse
+    public function getPaymentChannels(): Collection
     {
         $response = $this->client->request('POST' , '.' , [
             'form_params' => [
@@ -57,7 +58,9 @@ class PaydisiniLaravel
             ]
         ]);
 
-        return $response->getBody()->getContents();
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return collect($data);
     }
 
     /**
@@ -67,9 +70,9 @@ class PaydisiniLaravel
      * guide for a specified service.
      *
      * @param  string  $service
-     * @return string|JsonResponse
+     * @return Collection
      */
-    public function getPaymentGuide(string $service): string|JsonResponse
+    public function getPaymentGuide(string $service): Collection
     {
         $response = $this->client->request('POST','.' , [
             'form_params' => [
@@ -79,7 +82,9 @@ class PaydisiniLaravel
             ]
         ]);
 
-        return $response->getBody()->getContents();
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return collect($data);
     }
 
     /**
@@ -88,9 +93,9 @@ class PaydisiniLaravel
      * This method sends a request to the Paydisini API to retrieve the
      * user's profile details.
      *
-     * @return string|JsonResponse
+     * @return Collection
      */
-    public function getProfile(): string|JsonResponse
+    public function getProfile(): Collection
     {
         $response = $this->client->request('POST','.' , [
             'form_params' => [
@@ -100,7 +105,9 @@ class PaydisiniLaravel
             ]
         ]);
 
-        return $response->getBody()->getContents();
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return collect($data);
     }
 
     /**
@@ -111,10 +118,11 @@ class PaydisiniLaravel
      * the required payload for the request.
      *
      * @param  array  $data
-     * @return string|JsonResponse
+     * @return Collection
      */
-    public function createTransaction(array $data): string|JsonResponse
+    public function createTransaction(array $data): Collection
     {
+        
         $payload = [
             'key' => $this->apikey,
             'request' => 'new',
@@ -126,7 +134,7 @@ class PaydisiniLaravel
             'valid_time' => '10800',
             'type_fee' => '1',
             'payment_guide' => TRUE, // Set TRUE if you want to display payment guide
-            'signature' => $this->signature($data['unique_code'] . $data['service'] . $data['amount'] . 10800 . 'NewTransaction'),
+            'signature' => $this->signature($data['unique_code'].$data['service'].$data['amount'].'10800'.'NewTransaction'),
             'return_url' => $data['return_url']
         ];
         
@@ -137,8 +145,10 @@ class PaydisiniLaravel
         $response = $this->client->request('POST' , '.' , [
             'form_params' => $payload
         ]);
+        
+        $data = json_decode($response->getBody()->getContents(), true);
 
-        return $response->getBody()->getContents();
+        return collect($data);
     }
 
     /**
@@ -148,9 +158,9 @@ class PaydisiniLaravel
      * details of a specific transaction based on the unique code.
      *
      * @param  string  $unique_code
-     * @return string|JsonResponse
+     * @return Collection
      */
-    public function detailTransaction(string $unique_code): string|JsonResponse
+    public function detailTransaction(string $unique_code): Collection
     {
         $response = $this->client->request('POST' , '.' , [
             'form_params' => [
@@ -161,7 +171,9 @@ class PaydisiniLaravel
             ]
         ]);
     
-        return $response->getBody()->getContents();
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return collect($data);
     }
 
     /**
@@ -171,9 +183,9 @@ class PaydisiniLaravel
      * specific transaction based on the unique code.
      *
      * @param  string  $unique_code
-     * @return string|JsonResponse
+     * @return Collection
      */
-    public function cancelTransaction(string $unique_code): string|JsonResponse
+    public function cancelTransaction(string $unique_code): Collection
     {
         $response = $this->client->request('POST' , '.' , [
             'form_params' => [
@@ -184,7 +196,10 @@ class PaydisiniLaravel
             ]
         ]);
     
-        return $response->getBody()->getContents();
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return collect($data);
     }
 
      /**
