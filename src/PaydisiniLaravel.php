@@ -120,7 +120,7 @@ class PaydisiniLaravel
      * @param  array  $data
      * @return Collection
      */
-    public function createTransaction(array $data,$type_fee = 1): Collection
+    public function createTransaction(array $data): Collection
     {
         
         $payload = [
@@ -132,7 +132,7 @@ class PaydisiniLaravel
             'customer_email' => $data['customer_email'],
             'note' => $data['note'], 
             'valid_time' => '10800',
-            'type_fee' => $type_fee,
+            'type_fee' => $data['type_fee'],
             'payment_guide' => TRUE, // Set TRUE if you want to display payment guide
             'signature' => $this->signature($data['unique_code'].$data['service'].$data['amount'].'10800'.'NewTransaction'),
             'return_url' => $data['return_url']
