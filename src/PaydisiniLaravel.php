@@ -202,6 +202,33 @@ class PaydisiniLaravel
         return collect($data);
     }
 
+
+    /**
+     *  Fee Calculation
+     * 
+     * This method calculate fee based on requested amount and Service ID ( payment method )
+     * 
+     * @param int $amount
+     * @param string|int $service_id
+     */
+    public function feeCalculation(int $amount,string|int $service_id): Collection
+    {
+
+        $response = $this->client->request('POST','.' , [
+            'form_params' => [
+                'key' => $this->apikey,
+                'request' => 'fee_calculation',
+                'service' => $service_id,
+                'amount' => $amount,
+                'type_fee' => '1',
+                'signature' => $this->signature('FeeCalculation')
+            ]
+            ]);
+            $data = json_decode($response->getBody()->getContents(), true);
+
+            return collect($data);
+    }
+
      /**
      * Handle the callback from the payment gateway.
      *
